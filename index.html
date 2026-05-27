@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>🚀 마스터 우주 — 곱셈표·교환법칙·평가·무늬</title>
+<title>🚀 마스터 우주 — 곱셈표·자리 바꾸기·평가·무늬</title>
 <style>
 /* === RESET & BASE === */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;
@@ -43,8 +43,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
 /* === TOPBAR === */
 .topbar{display:flex;align-items:center;gap:12px;z-index:5;}
-.topbar .title{font-size:36px;font-weight:900;color:#1a4a6e;
-  background:#fff;padding:12px 30px;border-radius:999px;
+.topbar .title{font-size:30px;font-weight:900;color:#1a4a6e;
+  background:#fff;padding:10px 22px;border-radius:999px;max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   border:4px solid #5fb6f0;box-shadow:0 6px 16px rgba(95,182,240,.4),inset 0 -2px 0 rgba(0,0,0,.06);}
 .topbar .prog{flex:1;display:flex;gap:8px;justify-content:center;}
 .dot{width:18px;height:18px;border-radius:50%;background:rgba(26,74,110,.18);transition:.25s;}
@@ -391,7 +391,36 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
   line-height:1.4;}
 .nbList > div{padding:14px 22px;background:linear-gradient(135deg,#fff5e6,#ffe4ec);border-radius:18px;border-left:9px solid #ffd23f;}
 
-/* === SWAP — 교환법칙 === */
+/* === SWAP — 자리 바꾸기 (탐구 활동) === */
+.swapStep{display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;}
+.swapQbox{background:linear-gradient(135deg,#fff8d6,#ffe4ec);border:6px solid #ffd23f;border-radius:28px;
+  padding:24px 48px;box-shadow:0 10px 26px rgba(255,168,0,.3);text-align:center;max-width:920px;}
+.swapQhd{font-size:24px;font-weight:900;color:#ff5a1f;margin-bottom:8px;}
+.swapQ{font-size:42px;font-weight:900;color:#1a4a6e;line-height:1.3;}
+.swapQ b{color:#ff5a1f;background:#fff8d6;padding:3px 12px;border-radius:12px;}
+.swapAns{display:flex;gap:30px;}
+.swapAnsBtn{font-size:36px;font-weight:900;padding:20px 50px;border-radius:24px;cursor:pointer;
+  border:6px solid;color:#fff;font-family:inherit;box-shadow:0 7px 0 rgba(0,0,0,.2);transition:.15s;}
+.swapAnsBtn:hover{transform:translateY(-3px);}
+.swapAnsBtn:active{transform:translateY(2px);box-shadow:0 4px 0 rgba(0,0,0,.2);}
+.swapAnsBtn.yes{background:linear-gradient(180deg,#83d976,#5cc24a);border-color:#2d7d22;}
+.swapAnsBtn.no{background:linear-gradient(180deg,#ffaac5,#ff7095);border-color:#c44d6a;}
+.swapAnsBtn:disabled{opacity:.5;cursor:not-allowed;}
+.swapFb{font-size:26px;font-weight:900;min-height:32px;text-align:center;}
+.swapFb.ok{color:#2d7d22;}
+.swapFb.no{color:#c44d6a;}
+
+.swapNumRow{display:flex;gap:14px;align-items:center;}
+.swapInput{display:inline-block;min-width:160px;text-align:center;font-size:54px;font-weight:900;
+  color:#ff5a1f;background:#fff;border:5px solid #ffd23f;border-radius:18px;padding:10px 28px;
+  box-shadow:0 6px 14px rgba(255,168,0,.3);}
+.swapKeypad{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:560px;}
+.swapKeypad .sk{font-size:30px;font-weight:900;color:#fff;background:linear-gradient(180deg,#7bcdf2,#5fb6f0);
+  border:3px solid #fff;border-radius:14px;cursor:pointer;width:96px;height:64px;
+  box-shadow:0 5px 0 #2c7eb8;font-family:inherit;}
+.swapKeypad .sk:active{transform:translateY(2px);box-shadow:0 3px 0 #2c7eb8;}
+.swapKeypad .sk.del{background:linear-gradient(180deg,#ffaac5,#ff7095);box-shadow:0 5px 0 #c44d6a;}
+
 .swapRow{display:flex;gap:20px;align-items:center;justify-content:center;}
 .swapCard{background:#fff;border-radius:24px;padding:18px 22px;
   box-shadow:0 8px 22px rgba(0,0,0,.15);border:6px solid #5fb6f0;display:flex;flex-direction:column;
@@ -405,37 +434,50 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 .swapCard:nth-child(3) .swapGrid .swapDot{background:linear-gradient(135deg,#5fb6f0,#3b82f6);}
 .swapEq{font-size:32px;font-weight:900;color:#c4500a;background:#fff8d6;padding:6px 18px;border-radius:14px;border:4px solid #ffd23f;}
 .swapEqMid{font-size:64px;font-weight:900;color:#ff5a1f;}
-.swapHint{font-size:24px;font-weight:800;color:#1a4a6e;background:#fff;border:4px solid #ffd23f;
-  padding:12px 28px;border-radius:18px;box-shadow:0 5px 14px rgba(255,168,0,.25);text-align:center;max-width:880px;}
-.swapHint b{color:#ff5a1f;}
+.swapConcept{font-size:24px;font-weight:800;color:#1a4a6e;background:#fff;border:5px solid #5cc24a;
+  padding:14px 30px;border-radius:20px;box-shadow:0 6px 18px rgba(92,194,74,.3);text-align:center;
+  line-height:1.5;max-width:920px;}
+.swapConcept b{color:#2d7d22;}
 .swapNav{display:flex;gap:14px;align-items:center;justify-content:center;}
 
 /* === TABLE — 곱셈표 9×9 인터랙티브 === */
-.tableWrap{display:flex;gap:20px;align-items:flex-start;}
-.multTable{border-collapse:separate;border-spacing:3px;background:#fff;border-radius:18px;padding:8px;
-  box-shadow:0 8px 22px rgba(0,0,0,.15);border:4px solid #5fb6f0;}
-.multTable th,.multTable td{width:48px;height:42px;text-align:center;font-size:19px;font-weight:900;
-  border-radius:8px;}
-.multTable th{background:linear-gradient(180deg,#7bcdf2,#5fb6f0);color:#fff;}
-.multTable th.cornerTh{background:linear-gradient(180deg,#ffd86b,#ffb01f);color:#5a3500;}
-.multTable td{background:#fff5e6;color:#1a4a6e;}
-.multTable td.fixed{background:#d4f0fb;color:#1f4f9a;}
-.multTable td.blank{background:#fff;border:3px dashed #ef4444;color:#ef4444;cursor:pointer;}
-.multTable td.blank.cur{background:#fff8d6;border-color:#ff5a1f;animation:tblPulse 1.2s infinite;}
-@keyframes tblPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,90,31,.5);}50%{box-shadow:0 0 0 8px rgba(255,90,31,0);}}
-.multTable td.done{background:linear-gradient(180deg,#fff8d6,#ffd23f);color:#5a3500;animation:tblPop .5s ease;}
-@keyframes tblPop{0%{transform:scale(1);}40%{transform:scale(1.3);background:#5cc24a;color:#fff;}100%{transform:scale(1);}}
+.tableWrap{display:flex;gap:18px;align-items:flex-start;justify-content:center;}
+.multTable{border-collapse:separate;border-spacing:4px;background:#fff;border-radius:18px;padding:10px;
+  box-shadow:0 10px 28px rgba(0,0,0,.18);border:5px solid #5fb6f0;}
+.multTable th,.multTable td{width:60px;height:54px;text-align:center;font-size:26px;font-weight:900;
+  border-radius:10px;}
+.multTable th{background:linear-gradient(180deg,#7bcdf2,#5fb6f0);color:#fff;font-size:28px;
+  text-shadow:0 1px 2px rgba(0,0,0,.2);}
+.multTable th.cornerTh{background:linear-gradient(180deg,#ffd86b,#ffb01f);color:#5a3500;font-size:32px;}
+.multTable td{background:#eaf3fa;color:#345a73;}
+.multTable td.fixed{background:#eaf3fa;color:#345a73;}
+.multTable td.blank{background:linear-gradient(135deg,#fff8d6,#ffd86b);
+  border:5px solid #ff5a1f;color:#ff5a1f;cursor:pointer;font-size:42px;line-height:1;
+  box-shadow:inset 0 0 0 2px #fff;}
+.multTable td.blank:hover{transform:scale(1.05);}
+.multTable td.blank.cur{background:linear-gradient(135deg,#fff,#fff8d6);border-color:#ef4444;color:#ef4444;
+  animation:tblCur 1.2s ease-in-out infinite;transform:scale(1.14);z-index:5;position:relative;
+  border-width:6px;}
+@keyframes tblCur{0%,100%{box-shadow:inset 0 0 0 2px #fff,0 0 0 0 rgba(239,68,68,.5);}50%{box-shadow:inset 0 0 0 2px #fff,0 0 0 12px rgba(239,68,68,0);}}
+.multTable td.done{background:linear-gradient(180deg,#83d976,#5cc24a);color:#fff;animation:tblPop .6s ease;
+  box-shadow:0 4px 10px rgba(92,194,74,.4);}
+@keyframes tblPop{0%{transform:scale(1);}40%{transform:scale(1.35);}100%{transform:scale(1);}}
 .multTable td.wrong{animation:shake .4s;background:#ffaac5;color:#fff;}
-.tablePad{display:flex;flex-direction:column;gap:8px;}
-.tablePadDisp{background:linear-gradient(135deg,#fff5e6,#ffe4ec);border:4px solid #ffd23f;border-radius:14px;
-  padding:14px 26px;font-size:48px;font-weight:900;color:#ff5a1f;text-align:center;min-width:180px;}
-.tablePadKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
-.tablePadKeys .tk{font-size:22px;font-weight:900;color:#fff;background:linear-gradient(180deg,#7bcdf2,#5fb6f0);
-  border:2px solid #fff;border-radius:12px;cursor:pointer;width:55px;height:48px;
-  box-shadow:0 4px 0 #2c7eb8;}
-.tablePadKeys .tk:active{transform:translateY(2px);box-shadow:0 2px 0 #2c7eb8;}
-.tablePadKeys .tk.del{background:linear-gradient(180deg,#ffaac5,#ff7095);box-shadow:0 4px 0 #c44d6a;}
-.tablePadKeys .tk.enter{background:linear-gradient(180deg,#ffd86b,#ffb01f);color:#5a3500;box-shadow:0 4px 0 #c87f00;}
+/* scrPattern의 곱셈표는 약간 더 작게 */
+.patternTbl th,.patternTbl td{width:50px !important;height:44px !important;font-size:21px !important;}
+.patternTbl th{font-size:23px !important;}
+.patternTbl th.cornerTh{font-size:26px !important;}
+.tablePad{display:flex;flex-direction:column;gap:10px;}
+.tablePadDisp{background:linear-gradient(135deg,#fff5e6,#ffe4ec);border:5px solid #ffd23f;border-radius:18px;
+  padding:18px 32px;font-size:60px;font-weight:900;color:#ff5a1f;text-align:center;min-width:220px;
+  box-shadow:0 6px 18px rgba(255,168,0,.3);}
+.tablePadKeys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.tablePadKeys .tk{font-size:28px;font-weight:900;color:#fff;background:linear-gradient(180deg,#7bcdf2,#5fb6f0);
+  border:3px solid #fff;border-radius:14px;cursor:pointer;width:66px;height:60px;
+  box-shadow:0 5px 0 #2c7eb8;font-family:inherit;}
+.tablePadKeys .tk:active{transform:translateY(2px);box-shadow:0 3px 0 #2c7eb8;}
+.tablePadKeys .tk.del{background:linear-gradient(180deg,#ffaac5,#ff7095);box-shadow:0 5px 0 #c44d6a;}
+.tablePadKeys .tk.enter{background:linear-gradient(180deg,#ffd86b,#ffb01f);color:#5a3500;box-shadow:0 5px 0 #c87f00;}
 
 /* === PATTERN — 곱셈구구 무늬 === */
 .patternWrap{display:flex;gap:20px;align-items:flex-start;}
@@ -483,6 +525,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 .evalOpts .eOpt.right{background:linear-gradient(180deg,#83d976,#5cc24a);color:#fff;border-color:#2d7d22;}
 .evalOpts .eOpt.wrong{background:linear-gradient(180deg,#ffaac5,#ff7095);color:#fff;border-color:#c44d6a;animation:shake .4s;}
 .evalFb{font-size:24px;font-weight:900;min-height:30px;text-align:center;}
+.evalInput{display:inline-block;min-width:140px;text-align:center;font-size:50px;font-weight:900;
+  color:#ff5a1f;background:#fff;border:5px solid #ffd23f;border-radius:18px;padding:8px 24px;
+  box-shadow:0 6px 14px rgba(255,168,0,.3);}
+.evalKeypad{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;max-width:520px;}
+.evalKeypad .ek{font-size:24px;font-weight:900;color:#fff;background:linear-gradient(180deg,#7bcdf2,#5fb6f0);
+  border:3px solid #fff;border-radius:12px;cursor:pointer;width:84px;height:50px;
+  box-shadow:0 4px 0 #2c7eb8;font-family:inherit;}
+.evalKeypad .ek:active{transform:translateY(2px);box-shadow:0 2px 0 #2c7eb8;}
+.evalKeypad .ek.del{background:linear-gradient(180deg,#ffaac5,#ff7095);box-shadow:0 4px 0 #c44d6a;}
 .evalFb.ok{color:#2d7d22;}
 .evalFb.no{color:#c44d6a;}
 
@@ -624,6 +675,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 .dbRow{display:flex;justify-content:space-between;font-size:22px;font-weight:800;color:#1a4a6e;padding:8px 14px;border-bottom:2px solid #e0e7ef;}
 .dbRow:last-child{border:none;}
 
+/* 빈 박스 숨김 — 화면 진입 직후 빈 상태 가림 */
+.instrTxt:empty,.picCard:empty,.evalCard:has(>.evalQ:empty){visibility:hidden;}
 </style>
 </head>
 <body>
@@ -651,11 +704,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ START ============ -->
   <section class="screen on" id="scrStart">
-    <div class="missionBanner"><span class="mIcon">🚀</span><div class="mText"><div class="mTitle">우주 마스터와 함께</div><div class="mSub">곱셈표 완성·교환법칙·평가 모두 클리어!</div></div></div>
+    <div class="missionBanner"><span class="mIcon">🚀</span><div class="mText"><div class="mTitle">우주 마스터와 함께</div><div class="mSub">곱셈표 완성·자리 바꾸기·평가 모두 클리어!</div></div></div>
     <div class="titleEm">🚀⭐🪐</div>
     <h1><span>🚀 마스터 우주</span> — 곱셈구구 끝판!</h1>
     <div class="goalCardsRow">
-      <div class="goalCard"><div class="gIco">↔️</div><div class="gTitle">교환법칙</div><div class="gSub">3×4 = 4×3 비밀</div></div>
+      <div class="goalCard"><div class="gIco">↔️</div><div class="gTitle">자리 바꾸기</div><div class="gSub">3×4 = 4×3 비밀</div></div>
       <div class="goalCard"><div class="gIco">🪐</div><div class="gTitle">곱셈표</div><div class="gSub">9×9 마스터</div></div>
       <div class="goalCard"><div class="gIco">🏆</div><div class="gTitle">최종 평가</div><div class="gSub">10문제 별 시험</div></div>
     </div>
@@ -673,13 +726,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
   <section class="screen" id="scrPre" style="align-items:center;justify-content:flex-start;gap:14px;padding-top:12px;">
     <div class="recnote pre" style="width:780px;">📌 <b>활동 전 녹음</b><br>곱셈구구가 뭔지 아는 만큼 말해도 OK 🌱</div>
     <div class="instrTxt">"<span class="kw kw-gop">곱셈구구</span>"가 뭔지 아는 만큼 말해 보세요</div>
-    <div class="previewCard"><div class="pItem"><span class="pIco">🪐</span>곱셈표</div><span class="pSep">→</span><div class="pItem"><span class="pIco">↔️</span>교환법칙</div><span class="pSep">→</span><div class="pItem"><span class="pIco">🏆</span>최종 평가</div></div>
+    <div class="previewCard"><div class="pItem"><span class="pIco">🪐</span>곱셈표</div><span class="pSep">→</span><div class="pItem"><span class="pIco">↔️</span>자리 바꾸기</div><span class="pSep">→</span><div class="pItem"><span class="pIco">🏆</span>최종 평가</div></div>
     <div id="preRec"></div>
   </section>
 
   <!-- ============ TUTORIAL — +2 시연 ============ -->
   <section class="screen" id="scrTut">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" id="backBtnTut" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🔧 한 번 더 더하기</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" id="backBtnTut" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🔧 패턴 보기</div>
       <div class="prog" id="pgTut"></div><button class="spk" id="spkTut">🔇</button></div>
     <div class="vbody">
       <div class="instrTxt">빈칸에 들어갈 수를 순서대로 입력해 보세요</div>
@@ -707,7 +760,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ DAN 2 — 구성 원리 (비교) ============ -->
   <section class="screen" id="scrDan2Origin">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">↔️ 교환법칙</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">↔️ 자리 바꿈</div>
       <div class="prog" id="pgD2O"></div><button class="spk">🔇</button></div>
     <div class="vbody">
       <div class="instrTxt"><span class="kw kw-gop">2×4</span>는 <span class="kw kw-gop">2×3</span>보다 얼마나 클까요?</div>
@@ -719,7 +772,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ DAN 2 — 학습 (슬라이더+키패드) ============ -->
   <section class="screen" id="scrDan2Learn">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🪐 곱셈표 채우기</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🪐 곱셈표</div>
       <div class="prog" id="pgD2L"></div><button class="spk">🔇</button></div>
     <div class="danWrap">
       <div class="danSlider">
@@ -743,7 +796,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ DAN 5 — 구성 원리 ============ -->
   <section class="screen" id="scrDan5Origin">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🎨 곱셈구구 무늬</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🎨 무늬</div>
       <div class="prog" id="pgD5O"></div><button class="spk">🔇</button></div>
     <div class="vbody">
       <div class="instrTxt"><span class="kw kw-gop">5×4</span>는 <span class="kw kw-gop">5×3</span>보다 얼마나 클까요?</div>
@@ -755,7 +808,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ DAN 5 — 학습 ============ -->
   <section class="screen" id="scrDan5Learn">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🏆 최종 평가</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🏆 평가</div>
       <div class="prog" id="pgD5L"></div><button class="spk">🔇</button></div>
     <div class="danWrap">
       <div class="danSlider">
@@ -777,42 +830,68 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
     </div>
   </section>
 
-  <!-- ============ SWAP — 교환법칙 ============ -->
+  <!-- ============ SWAP — 자리 바꿔도 같을까? (탐구) ============ -->
   <section class="screen" id="scrSwap">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">↔️ 교환법칙</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🤔 자리 바꿈</div>
       <div class="prog"></div><button class="spk">🔇</button>
     </div>
-    <div class="vbody" style="justify-content:flex-start;padding-top:8px;gap:14px;">
-      <div class="instrTxt" id="swapInstr">↔️ <b>3 × 4</b>와 <b>4 × 3</b>! 어떻게 다르고 어떻게 같을까?</div>
-      <div class="swapRow">
-        <div class="swapCard" id="swapA">
-          <h3 id="swapAtit">3 × 4</h3>
-          <div class="swapGrid" id="swapAgrid"></div>
-          <div class="swapEq" id="swapAeq">= 12</div>
+    <div class="vbody" style="justify-content:flex-start;padding-top:10px;gap:14px;">
+      <!-- 1단계: 탐구 질문 -->
+      <div class="swapStep" id="swapStepQ">
+        <div class="swapQbox">
+          <div class="swapQhd">🤔 탐구해 봐요!</div>
+          <div class="swapQ" id="swapQtext">6 × 3과 3 × 6은 똑같을까요?</div>
         </div>
-        <div class="swapEqMid">=</div>
-        <div class="swapCard" id="swapB">
-          <h3 id="swapBtit">4 × 3</h3>
-          <div class="swapGrid" id="swapBgrid"></div>
-          <div class="swapEq" id="swapBeq">= 12</div>
+        <div class="swapAns">
+          <button class="swapAnsBtn yes" onclick="swapAnswer(true)">⭕ 같아요</button>
+          <button class="swapAnsBtn no" onclick="swapAnswer(false)">❌ 달라요</button>
         </div>
+        <div class="swapFb" id="swapFb"></div>
       </div>
-      <div class="swapHint" id="swapHint">✨ 모양은 달라도 <b>결과는 같아요!</b> 자리를 바꿔도 곱셈 결과는 같아요</div>
-      <div class="swapNav">
-        <button class="btn btn-skip" id="swapPrev" onclick="swapMove(-1)" style="display:none;">⬅️ 이전</button>
-        <button class="btn btn-cyan" id="swapBtn" onclick="swapMove(1)">다음 예 ➡️</button>
-        <button class="btn btn-go" id="swapNext" onclick="startTable()" style="display:none;">🪐 곱셈표 행성으로 ➡️</button>
+      <!-- 2단계: 같으면 얼마? (키패드 입력) -->
+      <div class="swapStep" id="swapStepN" style="display:none;">
+        <div class="swapQbox">
+          <div class="swapQhd">✨ 좋아요! 같다고 했어요</div>
+          <div class="swapQ" id="swapQtext2">같으면 <b>얼마</b>로 같을까요?</div>
+        </div>
+        <div class="swapNumRow">
+          <span class="swapInput" id="swapInput">_</span>
+          <button class="btn btn-cyan" onclick="swapSubmitNum()">확인 ✓</button>
+        </div>
+        <div class="swapKeypad" id="swapKeypad"></div>
+        <div class="swapFb" id="swapFb2"></div>
+      </div>
+      <!-- 3단계: 시각화 + 개념 제시 -->
+      <div class="swapStep" id="swapStepV" style="display:none;">
+        <div class="swapRow">
+          <div class="swapCard" id="swapA">
+            <h3 id="swapAtit">6 × 3</h3>
+            <div class="swapGrid" id="swapAgrid"></div>
+            <div class="swapEq" id="swapAeq">= 18</div>
+          </div>
+          <div class="swapEqMid">=</div>
+          <div class="swapCard" id="swapB">
+            <h3 id="swapBtit">3 × 6</h3>
+            <div class="swapGrid" id="swapBgrid"></div>
+            <div class="swapEq" id="swapBeq">= 18</div>
+          </div>
+        </div>
+        <div class="swapConcept" id="swapConcept">💡 <b>자리를 바꿔도 결과는 같아요!</b><br>곱하는 두 수의 순서가 바뀌어도 답은 똑같아요</div>
+        <div class="swapNav">
+          <button class="btn btn-cyan" id="swapNextEx" onclick="swapNextProblem()">다음 문제 ➡️</button>
+          <button class="btn btn-go" id="swapDone" onclick="startTable()" style="display:none;">🪐 곱셈표 채우러 ➡️</button>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ TABLE — 9×9 곱셈표 인터랙티브 ============ -->
   <section class="screen" id="scrTable">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🪐 곱셈표 채우기</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🪐 곱셈표</div>
       <div class="prog"></div><button class="spk">🔇</button>
     </div>
-    <div class="vbody" style="justify-content:flex-start;padding-top:8px;gap:10px;">
-      <div class="instrTxt"><b style="color:#ff5a1f;" id="tableHd">빈칸을 채워봐요!</b> · 정답 <span id="tableScore">0</span> / 12</div>
+    <div class="vbody" style="justify-content:flex-start;padding-top:4px;gap:6px;">
+      <div class="instrTxt" style="padding:8px 22px;font-size:26px;"><b style="color:#ff5a1f;" id="tableHd">빈칸을 채워봐요!</b> · 정답 <span id="tableScore">0</span> / 12</div>
       <div class="tableWrap">
         <table class="multTable" id="multTable"></table>
         <div class="tablePad">
@@ -826,11 +905,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ PATTERN — 곱셈구구 무늬 ============ -->
   <section class="screen" id="scrPattern">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🎨 곱셈 무늬</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🎨 무늬</div>
       <div class="prog"></div><button class="spk">🔇</button>
     </div>
-    <div class="vbody" style="justify-content:flex-start;padding-top:8px;gap:10px;">
-      <div class="instrTxt">🎨 단을 누르면 <b>그 단의 답들이 빛나는 무늬</b>로 보여요! 어떤 패턴이 보이나요?</div>
+    <div class="vbody" style="justify-content:flex-start;padding-top:4px;gap:6px;">
+      <div class="instrTxt">🎨 단을 누르면 <b>그 단의 답들이 빛나요</b>! 어떤 무늬가 보이나요?</div>
       <div class="patternWrap">
         <div class="patternPicker" id="patternPicker"></div>
         <table class="multTable patternTbl" id="patternTbl"></table>
@@ -842,7 +921,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ FINAL EVAL — 10문제 평가 ============ -->
   <section class="screen" id="scrEvalQs">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🏆 최종 평가</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🏆 평가</div>
       <div class="prog"></div><button class="spk">🔇</button>
     </div>
     <div class="vbody" style="justify-content:center;align-items:center;gap:18px;">
@@ -854,6 +933,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
       <div class="evalCard">
         <div class="evalQ" id="evalQ">? × ? = ?</div>
         <div class="evalOpts" id="evalOpts"></div>
+        <!-- 단답형 입력 영역 -->
+        <div class="evalInputArea" id="evalInputArea" style="display:none;flex-direction:column;align-items:center;gap:14px;">
+          <div style="display:flex;gap:14px;align-items:center;">
+            <span class="evalInput" id="evalInput">_</span>
+            <button class="btn btn-cyan" onclick="evalSubmitTyped()">확인 ✓</button>
+          </div>
+          <div class="evalKeypad" id="evalKeypad"></div>
+        </div>
         <div class="evalFb" id="evalFb"></div>
       </div>
     </div>
@@ -864,7 +951,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
     <div class="summaryWrap">
       <div class="summaryTitle">📌 오늘 알게 된 것</div>
       <div class="summaryCards">
-        <div class="sumCard"><div class="sIco">↔️</div><div class="sLbl">교환법칙</div>
+        <div class="sumCard"><div class="sIco">↔️</div><div class="sLbl">자리 바꾸기</div>
           <div class="sTxt"><span class="kw kw-gop">a × b</span> = b × a (자리 바꿔도 결과 같음!)</div>
           <div class="sEq">3×4 = 4×3</div></div>
         <div class="sumCard"><div class="sIco">🪐</div><div class="sLbl">곱셈표</div>
@@ -880,7 +967,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
   <!-- ============ ALL DANS — 6·7·8·9·1·0 한눈에 ============ -->
   <section class="screen" id="scrAllDans">
-    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🪐 곱셈표 9×9</div>
+    <div class="topbar"><button class="homeBtn" onclick="goHome()" title="처음으로">🏠</button><button class="backBtn" onclick="goBack()" title="직전 화면">⬅️</button><div class="title">🪐 곱셈표</div>
       <div class="prog" id="pgAllDans"></div>
       <button class="spk">🔇</button>
     </div>
@@ -940,28 +1027,28 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
         <div class="fastPickSub">10문제를 정해진 시간 안에! 어떤 칭호에 도전할까요?</div>
         <div class="fastPickGrid">
           <div class="fastCard lv1" onclick="startFast(1)">
-            <span class="fcTimeBadge">25초 도전</span>
+            <span class="fcTimeBadge">30초 도전</span>
             <div class="fcTitle">🚀 우주 마스터</div>
             <div class="fcSub">곱셈 마스터</div>
-            <div class="fcDesc">한 문제당 2.5초 · 극한 도전!</div>
+            <div class="fcDesc">⚡ 극한 도전!</div>
           </div>
           <div class="fastCard lv2" onclick="startFast(2)">
-            <span class="fcTimeBadge">45초 도전</span>
+            <span class="fcTimeBadge">1분 도전</span>
             <div class="fcTitle">⚡ 번개 로봇</div>
             <div class="fcSub">아주 빠른 계산</div>
-            <div class="fcDesc">한 문제당 4.5초 · 빠른 도전!</div>
+            <div class="fcDesc">⚡ 빠른 도전!</div>
           </div>
           <div class="fastCard lv3" onclick="startFast(3)">
-            <span class="fcTimeBadge">1분 10초</span>
+            <span class="fcTimeBadge">1분 30초</span>
             <div class="fcTitle">🔧 정밀 엔지니어</div>
             <div class="fcSub">안정된 계산</div>
-            <div class="fcDesc">한 문제당 7초 · 안정 도전!</div>
+            <div class="fcDesc">🛡️ 안정 도전!</div>
           </div>
           <div class="fastCard lv4" onclick="startFast(4)">
-            <span class="fcTimeBadge">1분 50초</span>
+            <span class="fcTimeBadge">2분 도전</span>
             <div class="fcTitle">🛡️ 차분한 가디언</div>
             <div class="fcSub">꼼꼼한 계산</div>
-            <div class="fcDesc">한 문제당 11초 · 차분히 도전!</div>
+            <div class="fcDesc">🐢 차분히 도전!</div>
           </div>
         </div>
       </div>
@@ -1008,24 +1095,24 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
   <!-- Speed pick overlay -->
   <div class="ov" id="ovSpeedPick"><div class="pop speedPick">
     <h2>⚡ 도전 단계를 골라요!</h2>
-    <div class="sLead">5문제를 정해진 시간 안에! 어떤 칭호에 도전할까요?</div>
+    <div class="sLead">10문제를 정해진 시간 안에! 어떤 칭호에 도전할까요?</div>
     <div class="speedGrid">
-      <button class="speedCard c1" data-tk="god"><span class="sBadge">25초 도전</span>
+      <button class="speedCard c1" data-tk="god"><span class="sBadge">30초 도전</span>
         <div class="sName">🚀 우주 마스터</div>
         <div class="sDesc">곱셈 마스터</div>
-        <div class="sExtra">한 문제 5초 · 극한 도전!</div></button>
-      <button class="speedCard c2" data-tk="lightning"><span class="sBadge">45초 도전</span>
+        <div class="sExtra">30초 안에 ⚡ · 극한 도전!</div></button>
+      <button class="speedCard c2" data-tk="lightning"><span class="sBadge">1분 도전</span>
         <div class="sName">⚡ 번개 로봇</div>
         <div class="sDesc">아주 빠른 계산</div>
-        <div class="sExtra">한 문제 9초 · 빠른 도전!</div></button>
-      <button class="speedCard c3" data-tk="rocket"><span class="sBadge">1분 10초 도전</span>
+        <div class="sExtra">1분 안에 ⚡ · 빠른 도전!</div></button>
+      <button class="speedCard c3" data-tk="rocket"><span class="sBadge">1분 30초 도전</span>
         <div class="sName">🔧 정밀 엔지니어</div>
         <div class="sDesc">안정된 계산</div>
-        <div class="sExtra">한 문제 14초 · 안정 도전!</div></button>
-      <button class="speedCard c4" data-tk="owl"><span class="sBadge">1분 50초 도전</span>
+        <div class="sExtra">1분 30초 안에 🛡️ · 안정 도전!</div></button>
+      <button class="speedCard c4" data-tk="owl"><span class="sBadge">2분 도전 도전</span>
         <div class="sName">🛡️ 차분한 가디언</div>
         <div class="sDesc">꼼꼼한 계산</div>
-        <div class="sExtra">한 문제 22초 · 차분히 도전!</div></button>
+        <div class="sExtra">2분 안에 🐢 · 차분히 도전!</div></button>
       <button class="speedCard cn" data-tk="none"><div class="sName">🐢 천천히 풀기</div>
         <div class="sExtra">시간 제한 없음</div></button>
     </div>
@@ -1143,7 +1230,7 @@ function _trackShow(id){
   if(_scrHist.length>20)_scrHist.shift();
   updateStageBar(id);
   // 키패드/풍선 화면은 마스코트 숨김 (UI 겹침 방지)
-  const hideMascot=['scrDan2Learn','scrDan5Learn','scrChal','scrAllDans','scrTable','scrPattern','scrEvalQs'].includes(id);
+  const hideMascot=['scrAllDans','scrCert','scrChal','scrDan2Learn','scrDan5Learn','scrEvalQs','scrFast','scrFastPick','scrPattern','scrSummary','scrTable'].includes(id);
   $('#mascot').style.display=hideMascot?'none':'';
   if(!hideMascot)setMascot(MASCOT_MSGS[id]||'',3500);
 }
@@ -1172,13 +1259,14 @@ function updateStageBar(scrId){
 const MASCOT_MSGS={
   'scrTut':'↔️ 자리 바꿔도 결과는 같아!',
   'scrMot':'🔍 묶음으로 정리되면 곱셈이야!',
-  'scrDan2Origin':'⚙️ 한 묶음 더 = 2개 더!',
-  'scrDan2Learn':'🪐 곱셈표 채워가자!',
-  'scrDan5Origin':'🍓 한 묶음 더 = 5개 더!',
-  'scrDan5Learn':'🍓 5씩 점프!',
+  'scrSwap':'🤔 자리 바꿔도 같은지 같이 알아보자!',
+  'scrTable':'🪐 빈칸을 차근차근 채워가자!',
+  'scrPattern':'🎨 단마다 어떤 무늬가 보이지?',
+  'scrAllDans':'📋 단마다 다른 비밀이 있어!',
   'scrSummary':'📝 오늘 알게 된 걸 확인하자!',
   'scrNotebook':'✏️ 공책에도 써보자!',
   'scrChal':'🎯 풍선을 콕! 정답 맞히기!',
+  'scrEvalQs':'🏆 마지막 별 시험! 자신 있게!',
   'scrPost':'🌟 새로 알게 된 점은?',
   'scrCert':'🚀 곱셈구구 마스터 완료!'
 };
@@ -1245,7 +1333,7 @@ const sel=$('#nameSel');NAMES.forEach(n=>{const o=document.createElement('option
 /* ============= 시작 ============= */
 $('#startBtn').onclick=()=>{S.name=sel.value;
   showChapter('🔌','🔌 1막. 첫 가동',
-    '🚀 우주 마스터: <span class="who">마지막 우주 항해! 곱셈표·교환법칙·평가·무늬를 함께 마스터하자. 준비됐어?</span>',
+    '🚀 우주 마스터: <span class="who">마지막 우주 항해! 곱셈표·자리 바꾸기·평가·무늬를 함께 마스터하자. 준비됐어?</span>',
     ()=>{buildPre();show('scrPre');});
 };
 $('#toDashBtn').onclick=()=>show('scrDash');
@@ -1328,32 +1416,30 @@ function renderMot(){
     c.onclick=()=>motPick(c,s);g.appendChild(c);
   });
   $('#motNext').disabled=true;
-  $('#motNext').onclick=()=>startTut();
+  $('#motNext').onclick=()=>startSwap();
 }
 
 /* ============= TUT: +N 패턴 시연 ============= */
-function startTut(){show('scrTut');renderTut();}
+function startTut(){startSwap();}
 function renderTut(){
+  // app6는 자리바꾸기 학습 — scrTut 화면은 자리바꾸기 미리보기로 표시
   const list=$('#tutEqList');list.innerHTML='';
-  // 3단의 1×~3× 미리 채워서 +3 패턴 보여주기
+  $('#scrTut .instrTxt').textContent='곱셈은 자리를 바꾸어도 결과가 같아요';
   const rows=[
-    {eq:'2 × 1', ans:'2', show:true, delta:null},
-    {eq:'2 × 2', ans:'4', show:true, delta:'+2'},
-    {eq:'2 × 3', ans:'6', show:true, delta:'+2'},
-    {eq:'2 × 4', ans:'?', show:false, delta:'+2', cur:true}
+    {eq:'3 × 4 =', ans:'12'},
+    {eq:'4 × 3 =', ans:'12'},
+    {eq:'5 × 2 =', ans:'10'},
+    {eq:'2 × 5 =', ans:'10'}
   ];
   rows.forEach((r,i)=>{
     const row=document.createElement('div');row.className='tutEqRow';
-    if(r.cur)row.classList.add('cur');
-    row.innerHTML=`<span>${r.eq} =</span><span class="ans">${r.ans}</span>`;
-    if(r.delta){const d=document.createElement('span');d.className='tutDelta';d.textContent=r.delta;row.appendChild(d);}
+    row.innerHTML=`<span>${r.eq}</span><span class="ans">${r.ans}</span>`;
     list.appendChild(row);
-    // 순차 fade-in
     row.style.opacity='0';row.style.transform='translateX(-20px)';
     row.style.transition='all .4s';
     setTimeout(()=>{row.style.opacity='1';row.style.transform='translateX(0)';},i*400+200);
   });
-  setTimeout(()=>{$('#tutNext').disabled=false;mascotCelebrate('✨ +3씩 늘어나는 비밀!');},2000);
+  setTimeout(()=>{$('#tutNext').disabled=false;mascotCelebrate&&mascotCelebrate('✨ 자리 바꿔도 같아요!');},2000);
 }
 $('#tutNext').onclick=()=>startSwap();
 function motPick(c,s){
@@ -1367,7 +1453,7 @@ function motPick(c,s){
 /* ============= 2차시: DAN 2 ============= */
 function startDan2Origin(){
   showChapter('⚙️','⚙️ 2막. 톱니바퀴 작동',
-    '🚀 우주 마스터: <span class="who">교환법칙! 3×4와 4×3은 똑같다는 우주의 비밀을 알아보자.</span>',
+    '🚀 우주 마스터: <span class="who">자리 바꾸기! 3×4와 4×3은 똑같다는 우주의 비밀을 알아보자.</span>',
     ()=>{renderDanOrigin(3,'d2cmp','d2opts',()=>startDan2Learn());show('scrDan2Origin');});
 }
 function renderDanOrigin(dan,cmpId,optId,onCorrect){
@@ -1546,41 +1632,116 @@ function renderAllDans(){
 }
 function startMore(){finishLearn();}
 
-/* ============= SWAP — 교환법칙 ============= */
+/* ============= SWAP — 자리 바꿔도 같을까? (탐구 활동) ============= */
 const SWAP_EXAMPLES=[
-  {a:3,b:4},{a:2,b:5},{a:6,b:3},{a:4,b:7}
+  {a:6,b:3,ans:18},
+  {a:4,b:5,ans:20},
+  {a:7,b:2,ans:14},
+  {a:8,b:3,ans:24}
 ];
-let swapIdx=0;
+let swapIdx=0, swapInputVal='';
 function startSwap(){
-  showChapter('↔️','↔️ 2막. 교환법칙 발견',
-    '🚀 우주 마스터: <span class="who">3×4와 4×3은 모양은 달라도 답은 같아! 한번 봐볼까?</span>',
-    ()=>{show('scrSwap');swapIdx=0;renderSwap();});
+  showChapter('🤔','🤔 2막. 자리를 바꾸면?',
+    '🚀 우주 마스터: <span class="who">곱하는 수의 자리를 바꿔도 답이 똑같을까? 한번 탐구해 보자!</span>',
+    ()=>{show('scrSwap');swapIdx=0;renderSwapQuestion();});
 }
-function renderSwap(){
+function renderSwapQuestion(){
+  // 단계 1: 질문만 보여주기
+  $('#swapStepQ').style.display='flex';
+  $('#swapStepN').style.display='none';
+  $('#swapStepV').style.display='none';
+  const e=SWAP_EXAMPLES[swapIdx];
+  $('#swapQtext').innerHTML=`<b>${e.a} × ${e.b}</b>과 <b>${e.b} × ${e.a}</b>은 똑같을까요?`;
+  $('#swapFb').textContent='';$('#swapFb').className='swapFb';
+  // 버튼 활성화
+  $$('#swapStepQ .swapAnsBtn').forEach(b=>b.disabled=false);
+}
+function swapAnswer(userSaysSame){
+  const e=SWAP_EXAMPLES[swapIdx];
+  $$('#swapStepQ .swapAnsBtn').forEach(b=>b.disabled=true);
+  if(userSaysSame){
+    $('#swapFb').textContent='✨ 좋은 생각! 정말 같은지 같이 확인해 봐요';
+    $('#swapFb').className='swapFb ok';
+    sndOk&&sndOk();
+    setTimeout(()=>renderSwapNum(),900);
+  } else {
+    $('#swapFb').textContent='🤔 정말로요? 그림으로 확인해 봐요!';
+    $('#swapFb').className='swapFb no';
+    sndNo&&sndNo();
+    setTimeout(()=>renderSwapVis(),1300);
+  }
+}
+function renderSwapNum(){
+  // 단계 2: 같으면 얼마? 입력
+  $('#swapStepQ').style.display='none';
+  $('#swapStepN').style.display='flex';
+  $('#swapStepV').style.display='none';
+  const e=SWAP_EXAMPLES[swapIdx];
+  $('#swapQtext2').innerHTML=`<b>${e.a} × ${e.b}</b> = <b>${e.b} × ${e.a}</b>! 그럼 <b>얼마</b>로 같을까요?`;
+  swapInputVal='';$('#swapInput').textContent='_';
+  $('#swapFb2').textContent='';$('#swapFb2').className='swapFb';
+  // 키패드 렌더 (10개 숫자 + del)
+  const kp=$('#swapKeypad');kp.innerHTML='';
+  ['1','2','3','4','5','6','7','8','9','0','del'].forEach(k=>{
+    const b=document.createElement('button');b.className='sk';
+    if(k==='del'){b.classList.add('del');b.textContent='⌫';}
+    else b.textContent=k;
+    b.onclick=()=>swapKeypadKey(k);kp.appendChild(b);
+  });
+}
+function swapKeypadKey(k){
+  if(k==='del')swapInputVal=swapInputVal.slice(0,-1);
+  else if(swapInputVal.length<3)swapInputVal+=k;
+  $('#swapInput').textContent=swapInputVal||'_';
+}
+function swapSubmitNum(){
+  if(!swapInputVal)return;
+  const e=SWAP_EXAMPLES[swapIdx];
+  if(+swapInputVal===e.ans){
+    $('#swapFb2').textContent='🎉 정답!';$('#swapFb2').className='swapFb ok';
+    sndOk&&sndOk();
+    setTimeout(()=>renderSwapVis(),900);
+  } else {
+    $('#swapFb2').textContent=`❌ 다시 생각해 봐요. (${e.a} × ${e.b} 또는 ${e.b} × ${e.a}을 계산해 봐요)`;
+    $('#swapFb2').className='swapFb no';
+    sndNo&&sndNo();
+    swapInputVal='';$('#swapInput').textContent='_';
+  }
+}
+function renderSwapVis(){
+  // 단계 3: 시각화 + 개념 제시
+  $('#swapStepQ').style.display='none';
+  $('#swapStepN').style.display='none';
+  $('#swapStepV').style.display='flex';
   const e=SWAP_EXAMPLES[swapIdx];
   $('#swapAtit').textContent=`${e.a} × ${e.b}`;
   $('#swapBtit').textContent=`${e.b} × ${e.a}`;
   const gA=$('#swapAgrid'),gB=$('#swapBgrid');
   gA.innerHTML='';gB.innerHTML='';
+  // a행 b열
   gA.style.gridTemplateColumns=`repeat(${e.b},30px)`;
+  // b행 a열
   gB.style.gridTemplateColumns=`repeat(${e.a},30px)`;
   for(let i=0;i<e.a*e.b;i++){
-    const dA=document.createElement('div');dA.className='swapDot';dA.style.animationDelay=(i*0.04)+'s';gA.appendChild(dA);
-    const dB=document.createElement('div');dB.className='swapDot';dB.style.animationDelay=(i*0.04)+'s';gB.appendChild(dB);
+    const dA=document.createElement('div');dA.className='swapDot';dA.style.animationDelay=(i*0.015)+'s';gA.appendChild(dA);
+    const dB=document.createElement('div');dB.className='swapDot';dB.style.animationDelay=(i*0.015)+'s';gB.appendChild(dB);
   }
-  $('#swapAeq').textContent=`= ${e.a*e.b}`;
-  $('#swapBeq').textContent=`= ${e.b*e.a}`;
-  $('#swapInstr').innerHTML=`↔️ <b>${e.a} × ${e.b}</b>와 <b>${e.b} × ${e.a}</b>! 어떻게 다르고 어떻게 같을까?`;
-  $('#swapPrev').style.display=swapIdx>0?'inline-block':'none';
+  $('#swapAeq').textContent=`= ${e.ans}`;
+  $('#swapBeq').textContent=`= ${e.ans}`;
+  $('#swapConcept').innerHTML=`💡 <b>맞아요! ${e.a} × ${e.b} = ${e.b} × ${e.a} = ${e.ans}</b><br>곱하는 두 수의 <b>자리를 바꿔도 결과는 같아요</b>`;
+  // 마지막 문제면 곱셈표로 진행
   if(swapIdx>=SWAP_EXAMPLES.length-1){
-    $('#swapBtn').style.display='none';$('#swapNext').style.display='inline-block';
+    $('#swapNextEx').style.display='none';
+    $('#swapDone').style.display='inline-block';
   } else {
-    $('#swapBtn').style.display='inline-block';$('#swapNext').style.display='none';
+    $('#swapNextEx').style.display='inline-block';
+    $('#swapDone').style.display='none';
   }
 }
-function swapMove(d){
-  swapIdx=Math.max(0,Math.min(SWAP_EXAMPLES.length-1,swapIdx+d));
-  renderSwap();
+function swapNextProblem(){
+  swapIdx++;
+  if(swapIdx>=SWAP_EXAMPLES.length){startTable();return;}
+  renderSwapQuestion();
 }
 
 /* ============= TABLE — 9×9 곱셈표 인터랙티브 ============= */
@@ -1720,19 +1881,48 @@ const EVAL_QS=[
   {a:3,b:4},{a:6,b:5},{a:7,b:3},{a:4,b:8},{a:9,b:2},
   {a:8,b:6},{a:5,b:7},{a:2,b:9},{a:6,b:7},{a:8,b:9}
 ];
-let evalIdx=0,evalRight=0;
+let evalIdx=0,evalRight=0,evalInput='',evalByDan={};
 function startEvalQs(){
-  show('scrEvalQs');evalIdx=0;evalRight=0;
+  show('scrEvalQs');evalIdx=0;evalRight=0;evalInput='';evalByDan={};
   $('#evalProgFill').style.width='0%';$('#evalScore').textContent='✅ 0';
+  // 키패드 한 번만 렌더
+  const kp=$('#evalKeypad');kp.innerHTML='';
+  ['1','2','3','4','5','6','7','8','9','0','del'].forEach(k=>{
+    const b=document.createElement('button');b.className='ek';
+    if(k==='del'){b.classList.add('del');b.textContent='⌫';}
+    else b.textContent=k;
+    b.onclick=()=>evalKey(k);kp.appendChild(b);
+  });
   nextEvalQ();
+}
+function recordEvalAnswer(correct){
+  const q=EVAL_QS[evalIdx];
+  // 두 수 중 더 큰 수를 단으로 (예: 3×6=6단)
+  const dan=Math.max(q.a,q.b);
+  if(!evalByDan[dan])evalByDan[dan]={right:0,total:0};
+  evalByDan[dan].total++;
+  if(correct)evalByDan[dan].right++;
+}
+function summarizeEvalDans(){
+  // 정답률 100%인 단과 70% 미만인 단 분리
+  const good=[],weak=[];
+  Object.entries(evalByDan).forEach(([dan,r])=>{
+    const pct=r.right/r.total;
+    if(pct>=1)good.push(dan);
+    else if(pct<0.6)weak.push(dan);
+  });
+  let msg='';
+  if(good.length)msg+=`잘한 단: ${good.sort().join('·')} ⭐  `;
+  if(weak.length)msg+=`연습 필요: ${weak.sort().join('·')} 💪`;
+  return msg||'골고루 잘했어요! 👍';
 }
 function nextEvalQ(){
   if(evalIdx>=EVAL_QS.length){
-    // 평가 완료 → 결과 저장 후 풍선 사냥 또는 cert
     S.evalRight=evalRight;S.evalTotal=10;
     S.chalRight=evalRight;S.chalTotal=10;
+    const danMsg=summarizeEvalDans();
     showChapter('🎉','🎉 평가 완료',
-      `🚀 우주 마스터: <span class="who">${evalRight}/10! ${evalRight>=8?'완벽해!':evalRight>=5?'잘했어!':'다시 도전!'}</span>`,
+      `🚀 우주 마스터: <span class="who">${evalRight}/10! ${evalRight>=8?'완벽해!':evalRight>=5?'잘했어!':'다시 도전!'}<br><b style="font-size:.85em;color:#5cc24a;">${danMsg}</b></span>`,
       ()=>{show('scrPost');if(window.buildPost)buildPost();});
     return;
   }
@@ -1741,32 +1931,63 @@ function nextEvalQ(){
   $('#evalQ').textContent=`${q.a} × ${q.b} = ?`;
   $('#evalNum').textContent=`${evalIdx+1} / 10`;
   $('#evalProgFill').style.width=((evalIdx)/10*100)+'%';
-  // 4지선다 (1정답 + 3 오답)
-  const opts=new Set([ans]);
-  while(opts.size<4){
-    const v=ans+(Math.random()<.5?-1:1)*(2+Math.floor(Math.random()*8));
-    if(v>0&&v!==ans)opts.add(v);
-  }
-  const arr=[...opts].sort(()=>Math.random()-.5);
-  const grp=$('#evalOpts');grp.innerHTML='';
-  arr.forEach(v=>{const b=document.createElement('button');b.className='eOpt';b.textContent=v;
-    b.onclick=()=>evalChoose(b,v,ans);grp.appendChild(b);});
   $('#evalFb').textContent='';$('#evalFb').className='evalFb';
+  evalInput='';$('#evalInput').textContent='_';
+  // 1~6번: 4지선다, 7~10번: 단답형 (더 어려운 평가)
+  if(evalIdx<6){
+    $('#evalOpts').style.display='grid';
+    $('#evalInputArea').style.display='none';
+    const opts=new Set([ans]);
+    while(opts.size<4){
+      const v=ans+(Math.random()<.5?-1:1)*(2+Math.floor(Math.random()*8));
+      if(v>0&&v!==ans)opts.add(v);
+    }
+    const arr=[...opts].sort(()=>Math.random()-.5);
+    const grp=$('#evalOpts');grp.innerHTML='';
+    arr.forEach(v=>{const b=document.createElement('button');b.className='eOpt';b.textContent=v;
+      b.onclick=()=>evalChoose(b,v,ans);grp.appendChild(b);});
+  } else {
+    $('#evalOpts').style.display='none';
+    $('#evalInputArea').style.display='flex';
+  }
 }
 function evalChoose(btn,v,ans){
   if(btn.classList.contains('right')||btn.classList.contains('wrong'))return;
   $$('#evalOpts .eOpt').forEach(b=>b.style.pointerEvents='none');
-  if(v===ans){
+  const correct=(v===ans);
+  recordEvalAnswer(correct);
+  if(correct){
     btn.classList.add('right');evalRight++;sndOk&&sndOk();
     $('#evalFb').textContent='✅ 정답!';$('#evalFb').className='evalFb ok';
     $('#evalScore').textContent='✅ '+evalRight;
   } else {
     btn.classList.add('wrong');sndNo&&sndNo();
     $('#evalFb').textContent=`❌ 정답은 ${ans}`;$('#evalFb').className='evalFb no';
-    // 정답 표시
     $$('#evalOpts .eOpt').forEach(b=>{if(+b.textContent===ans)b.classList.add('right');});
   }
   setTimeout(()=>{evalIdx++;$$('#evalOpts .eOpt').forEach(b=>b.style.pointerEvents='');nextEvalQ();},1200);
+}
+function evalKey(k){
+  if(k==='del')evalInput=evalInput.slice(0,-1);
+  else if(evalInput.length<3)evalInput+=k;
+  $('#evalInput').textContent=evalInput||'_';
+}
+function evalSubmitTyped(){
+  if(!evalInput&&EVAL_QS[evalIdx].a*EVAL_QS[evalIdx].b!==0)return;
+  const q=EVAL_QS[evalIdx];const ans=q.a*q.b;
+  const userVal=evalInput===''?null:+evalInput;
+  const correct=(userVal===ans);
+  recordEvalAnswer(correct);
+  if(correct){
+    evalRight++;sndOk&&sndOk();
+    $('#evalFb').textContent='✅ 정답!';$('#evalFb').className='evalFb ok';
+    $('#evalScore').textContent='✅ '+evalRight;
+    setTimeout(()=>{evalIdx++;nextEvalQ();},1100);
+  } else {
+    sndNo&&sndNo();
+    $('#evalFb').textContent=`❌ 정답은 ${ans}`;$('#evalFb').className='evalFb no';
+    setTimeout(()=>{evalIdx++;nextEvalQ();},1500);
+  }
 }
 $('#nbNext').onclick=()=>{
   showChapter('🏆','🏆 5막. 최종 평가',
@@ -1797,10 +2018,10 @@ function pickSpeedTitle(onPicked){
   });
 }
 const SPEED_TITLES={
-  god:{ico:'🚀',name:'우주 마스터',sub:'곱셈 마스터',desc:'한 문제 5초 · 극한 도전!',total:25,perQ:5,cls:'c1'},
-  lightning:{ico:'⚡',name:'번개 로봇',sub:'아주 빠른 계산',desc:'한 문제 9초 · 빠른 도전!',total:45,perQ:9,cls:'c2'},
-  rocket:{ico:'🔧',name:'정밀 엔지니어',sub:'안정된 계산',desc:'한 문제 14초 · 안정 도전!',total:70,perQ:14,cls:'c3'},
-  owl:{ico:'🛡️',name:'차분한 가디언',sub:'꼼꼼한 계산',desc:'한 문제 22초 · 차분히 도전!',total:110,perQ:22,cls:'c4'},
+  god:{ico:'🚀',name:'우주 마스터',sub:'곱셈 마스터',desc:'30초 안에! ⚡ 극한 도전!',total:30,perQ:6,cls:'c1'},
+  lightning:{ico:'⚡',name:'번개 로봇',sub:'아주 빠른 계산',desc:'1분 안에! ⚡ 빠른 도전!',total:60,perQ:12,cls:'c2'},
+  rocket:{ico:'🔧',name:'정밀 엔지니어',sub:'안정된 계산',desc:'1분 30초 안에! 🛡️ 안정 도전!',total:90,perQ:18,cls:'c3'},
+  owl:{ico:'🛡️',name:'차분한 가디언',sub:'꼼꼼한 계산',desc:'2분 안에! 🐢 차분히 도전!',total:120,perQ:24,cls:'c4'},
   none:{ico:'🐢',name:'천천히',sub:'시간 제한 없음',desc:'천천히 정확하게 풀어봐요',total:0,perQ:0,cls:'cn'}
 };
 
@@ -1814,7 +2035,7 @@ function startSpeedTimer(secs){
     if(_spdLeft<=0){stopSpeedTimer();onSpeedTimeUp();}},1000);
 }
 function stopSpeedTimer(){if(_spdT){clearInterval(_spdT);_spdT=null;}$('#timerBar').classList.add('hidden');$('#timerBar').classList.remove('urgent');$('#stageBar').style.visibility='';}
-function updateSpdUI(){$('#timerInner').style.width=Math.max(0,_spdLeft/_spdMax*100)+'%';$('#timerNum').textContent=Math.max(0,_spdLeft);}
+function updateSpdUI(){$('#timerInner').style.width=Math.max(0,_spdLeft/_spdMax*100)+'%';const s=Math.max(0,_spdLeft);$('#timerNum').textContent=s>=60?Math.floor(s/60)+':'+String(s%60).padStart(2,'0'):s+'';}
 function onSpeedTimeUp(){toast('⏰ 시간 초과!');setTimeout(()=>finishChal(),900);}
 
 function renderChal(){
@@ -1938,10 +2159,10 @@ $('#certAgain').onclick=()=>{show('scrFastPick');};
 
 /* ============= FAST (옛 호환 — 10문제) ============= */
 const FAST_LEVELS = {
-  1:{name:'우주 마스터',icon:'🚀',time:25,emoji:'🤖'},
-  2:{name:'번개 로봇',icon:'⚡',time:45,emoji:'⚡'},
-  3:{name:'정밀 엔지니어',icon:'🔧',time:70,emoji:'🔧'},
-  4:{name:'차분한 가디언',icon:'🛡️',time:110,emoji:'🛡️'}
+  1:{name:'우주 마스터',icon:'🚀',time:30,emoji:'🤖'},
+  2:{name:'번개 로봇',icon:'⚡',time:60,emoji:'⚡'},
+  3:{name:'정밀 엔지니어',icon:'🔧',time:90,emoji:'🔧'},
+  4:{name:'차분한 가디언',icon:'🛡️',time:120,emoji:'🛡️'}
 };
 function startFast(lv){
   const probs=[];const dans=[2,5];
