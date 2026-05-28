@@ -506,6 +506,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 .patternMsg{font-size:22px;font-weight:800;color:#1a4a6e;background:#fff;border:4px solid #ffd23f;
   padding:10px 24px;border-radius:16px;box-shadow:0 4px 12px rgba(255,168,0,.25);text-align:center;}
 .patternMsg b{color:#ff5a1f;}
+/* 단별 비밀 팝업 */
+.danSecretOv{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:9999;animation:fadeIn .25s;}
+.danSecretBox{background:#fff;border:6px solid #ffd23f;border-radius:28px;padding:24px 38px;max-width:680px;width:90%;
+  box-shadow:0 18px 50px rgba(0,0,0,.32);display:flex;flex-direction:column;align-items:center;gap:14px;
+  animation:popIn .35s cubic-bezier(.34,1.56,.64,1);}
+.danSecretIcon{font-size:60px;line-height:1;}
+.danSecretTitle{font-size:32px;font-weight:900;color:#7841c4;}
+.danSecretMain{font-size:24px;font-weight:800;color:#1a4a6e;text-align:center;line-height:1.45;background:#fff8d6;padding:14px 22px;border-radius:14px;border:3px dashed #ffb01f;}
+.danSecretSub{font-size:18px;color:#5b4a1a;text-align:center;line-height:1.55;padding:0 12px;}
+.danSecretEx{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px;background:#f5f9ff;padding:14px 18px;border-radius:14px;border:2px solid #c9def0;width:100%;box-sizing:border-box;}
+.danSecretEx span{font-size:18px;font-weight:700;color:#1f4258;font-family:'맑은 고딕',monospace;text-align:center;}
+.danSecretClose{font-size:22px;padding:12px 38px;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
 
 /* === EVAL — 평가 10문제 === */
 .evalProgRow{display:flex;gap:14px;align-items:center;background:#fff;border:5px solid #5fb6f0;border-radius:99px;
@@ -677,6 +691,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:#ffe4ec;}
 
 /* 빈 박스 숨김 — 화면 진입 직후 빈 상태 가림 */
 .instrTxt:empty,.picCard:empty,.evalCard:has(>.evalQ:empty){visibility:hidden;}
+/* 줄바꿈 — 한국어 어절 단위로 자연스럽게 */
+body,.bubble,.mascotBubble,#bubble,.instrTxt,.goal,.goal p,.tutCard,.tutCard *,.chapMsg,
+.chMsg,.tutBox,.tip,.instr,.fbBox,.helpBox,.miniInstr,.bigtxt,.title,
+.sitQBox,.sitQ,.evalQ,.swapQ,.danIntro,.tutSub,.assistTxt,h1,h2,h3,h4,p,span,div,button{
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
+/* 인라인 코드/숫자 등은 끊지 않음 */
+.qa,.qb,.qbox,.q,.ans,.num,.numBig,.cnt,.eOpt,.eOpt *,
+.balloon,.balQ,.fcAns,.evalInput,.quizInput,.timerNum{
+  word-break: normal;
+  overflow-wrap: normal;
+}
 </style>
 </head>
 <body>
@@ -1818,8 +1846,13 @@ function tableSubmit(){
     sndOk&&sndOk();
     TBL_INPUT='';$('#tablePadDisp').textContent='_';TBL_CUR=null;
     if(TBL_SOLVED>=12){
-      $('#tableNext').style.display='inline-block';mascotCelebrate&&mascotCelebrate('🎉 곱셈표 완성!');
-      confetti&&confetti();
+      // 버튼 잘림 방지 — chapter 모달로 자연스럽게 전환
+      confetti&&confetti();sndOk&&sndOk();
+      setTimeout(()=>{
+        showChapter('🎉','🎉 곱셈표 완성!',
+          `🚀 우주 마스터: <span class="who">잘했어! 이제 단마다 어떤 무늬가 숨어 있는지 알아보자!</span>`,
+          ()=>startPattern());
+      },600);
     } else {
       // 다음 빈칸 자동 선택
       const next=$('.multTable td.blank');if(next)tableSelect(next);
@@ -1854,10 +1887,21 @@ function renderPattern(){
     const b=document.createElement('button');b.className='pBtn p'+d;b.textContent=d+'단';
     b.onclick=()=>patternPick(d,b);pk.appendChild(b);
   }
-  $('#patternMsg').innerHTML='💡 단을 골라 무늬를 만들어 보세요!';
+  $('#patternMsg').innerHTML='💡 단을 골라 무늬와 비밀을 만나봐요! (3개 이상 발견하면 다음으로)';
   $('#patternNext').style.display='none';
   patternPicked=new Set();
 }
+// 단별 풍부한 비밀 (지도안 핵심 내용)
+const DAN_SECRETS={
+  2:{icon:'🐝',title:'2단의 비밀',main:'2단의 곱은 모두 <b style="color:#ff5a1f;font-size:1.2em;">짝수</b>예요!',sub:'2씩 늘어나기 때문에 일의 자리가 2·4·6·8·0 순서로 반복돼요.',ex:['2×1 = 2','2×2 = 4','2×3 = 6','...','2×5 = 10','2×9 = 18']},
+  3:{icon:'🌸',title:'3단의 비밀',main:'3단은 <b style="color:#ff5a1f;font-size:1.2em;">3씩</b> 늘어나요!',sub:'짝수와 홀수가 번갈아 나타나요. (3, 6, 9, 12 ...) 일의 자리 패턴을 따라가 보면 재미있어요.',ex:['3×1 = 3','3×2 = 6','3×3 = 9','3×4 = 12','3×5 = 15','3×9 = 27']},
+  4:{icon:'🍀',title:'4단의 비밀',main:'4단은 <b style="color:#ff5a1f;font-size:1.2em;">2단의 2배</b>예요!',sub:'2단의 답에 ×2를 하면 4단이 되고, 4단도 모두 짝수예요.',ex:['4×1 = 4 (= 2×2)','4×2 = 8 (= 2×4)','4×3 = 12 (= 2×6)','4×5 = 20','4×9 = 36']},
+  5:{icon:'⭐',title:'5단의 비밀',main:'5단의 곱은 <b style="color:#ff5a1f;font-size:1.2em;">끝자리가 0이나 5</b>!',sub:'5, 10, 15, 20, 25 ... 손가락으로 5씩 뛰어 세면 쉬워요.',ex:['5×1 = 5','5×2 = 10','5×3 = 15','5×4 = 20','5×5 = 25','5×9 = 45']},
+  6:{icon:'🌟',title:'6단의 비밀',main:'6단은 <b style="color:#ff5a1f;font-size:1.2em;">2단×3 = 3단×2</b>!',sub:'2단을 3번 더한 것과 같고, 3단을 2번 더한 것과도 같아요. 모두 짝수예요.',ex:['6×1 = 6','6×2 = 12','6×3 = 18','6×5 = 30','6×7 = 42','6×9 = 54']},
+  7:{icon:'🍄',title:'7단의 비밀',main:'7단은 <b style="color:#ff5a1f;font-size:1.2em;">규칙이 가장 까다로워요</b>!',sub:'7씩 늘어나는데 짝수·홀수가 번갈아 나와요. 자주 외우면 친해질 수 있어요.',ex:['7×1 = 7','7×2 = 14','7×3 = 21','7×5 = 35','7×7 = 49','7×9 = 63']},
+  8:{icon:'🐙',title:'8단의 비밀',main:'8단은 <b style="color:#ff5a1f;font-size:1.2em;">4단의 2배 = 2단의 4배</b>!',sub:'8씩 늘어나고 모두 짝수예요. 4단과 짝지어 외우면 쉬워요.',ex:['8×1 = 8 (= 4×2)','8×2 = 16','8×3 = 24','8×5 = 40','8×7 = 56','8×9 = 72']},
+  9:{icon:'🦋',title:'9단의 비밀',main:'9단의 곱은 <b style="color:#ff5a1f;font-size:1.2em;">두 자리 수를 더하면 9</b>!',sub:'9, 18, 27, 36, 45 ... 9의 답들을 쭉 보면 일의 자리는 9·8·7·6·5·4·3·2·1로 줄어들어요!',ex:['9×1 = 9','9×2 = 18 (1+8=9)','9×3 = 27 (2+7=9)','9×4 = 36 (3+6=9)','9×9 = 81 (8+1=9)']}
+};
 let patternPicked=new Set();
 function patternPick(d,btn){
   // 모든 무늬 제거
@@ -1870,10 +1914,28 @@ function patternPick(d,btn){
     if(r===d||c===d){td.classList.add('glow','p'+d);}
   });
   patternPicked.add(d);
-  const tips={2:'2단은 짝수만 나타나요!',3:'3단은 일정한 간격!',4:'4단은 2단의 2배!',5:'5단은 끝자리가 0·5!',
-    6:'6단은 3단의 2배!',7:'7단은 어려워도 패턴이 있어요!',8:'8단은 4단의 2배!',9:'9단은 1·8·2·7·3·6 거꾸로!'};
-  $('#patternMsg').innerHTML=`✨ <b>${d}단 무늬!</b> ${tips[d]}`;
-  if(patternPicked.size>=3){$('#patternNext').style.display='inline-block';}
+  // 풍부한 비밀 팝업
+  const S=DAN_SECRETS[d];
+  showSecretModal(d,S);
+}
+function showSecretModal(d,S){
+  // 기존 모달 제거
+  $$('.danSecretOv').forEach(o=>o.remove());
+  const ov=document.createElement('div');ov.className='danSecretOv';
+  ov.innerHTML=`<div class="danSecretBox">
+    <div class="danSecretIcon">${S.icon}</div>
+    <div class="danSecretTitle">${S.title}</div>
+    <div class="danSecretMain">${S.main}</div>
+    <div class="danSecretSub">${S.sub}</div>
+    <div class="danSecretEx">${S.ex.map(e=>`<span>${e}</span>`).join('')}</div>
+    <button class="btn btn-cyan danSecretClose">알겠어요! ✓</button>
+  </div>`;
+  document.body.appendChild(ov);
+  ov.querySelector('.danSecretClose').onclick=()=>{
+    ov.remove();
+    $('#patternMsg').innerHTML=`✨ <b style="color:#7841c4;">${d}단 무늬</b>를 발견했어요! 다른 단도 눌러봐요. <b>(${patternPicked.size}/3 이상)</b>`;
+    if(patternPicked.size>=3){$('#patternNext').style.display='inline-block';}
+  };
 }
 
 /* ============= EVAL — 10문제 평가 ============= */
