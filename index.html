@@ -705,6 +705,21 @@ body,.bubble,.mascotBubble,#bubble,.instrTxt,.goal,.goal p,.tutCard,.tutCard *,.
   word-break: normal;
   overflow-wrap: normal;
 }
+
+/* === FIX: 2·5단 원리(비교) 화면 — 1280×800 잘림 방지 압축 === */
+#scrDan2Origin .vbody,#scrDan5Origin .vbody{gap:6px;padding:8px 0 10px;justify-content:center;}
+#scrDan2Origin .instrTxt,#scrDan5Origin .instrTxt{font-size:26px;padding:9px 26px;border-width:4px;}
+#scrDan2Origin .cmpRow,#scrDan5Origin .cmpRow{margin:2px 0;gap:24px;}
+#scrDan2Origin .cmpBox,#scrDan5Origin .cmpBox{padding:12px 22px;gap:6px;min-width:280px;}
+#scrDan2Origin .cmpBox h3,#scrDan5Origin .cmpBox h3{font-size:30px;}
+#scrDan2Origin .cmpDots,#scrDan5Origin .cmpDots{gap:8px;max-width:210px;}
+#scrDan2Origin .cdot,#scrDan5Origin .cdot{width:32px;height:32px;}
+#scrDan2Origin .cmpDiff,#scrDan5Origin .cmpDiff{font-size:24px;padding:7px 24px;border-width:4px;}
+#scrDan2Origin .danOriginInput,#scrDan5Origin .danOriginInput{gap:6px;padding:2px;}
+#scrDan2Origin .doDisp,#scrDan5Origin .doDisp{font-size:18px;}
+#scrDan2Origin .doVal,#scrDan5Origin .doVal{font-size:28px;}
+#scrDan2Origin .doPad,#scrDan5Origin .doPad{grid-template-columns:repeat(4,52px);gap:5px;}
+#scrDan2Origin .doKey,#scrDan5Origin .doKey{width:52px;height:44px;font-size:22px;}
 </style>
 </head>
 <body>
